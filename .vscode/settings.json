@@ -11,5 +11,6 @@
     "files.exclude": {
         "**/.godot": true,
         "**/*.import": true
-    }
+    },
+    "godotTools.editorPath.godot4": "c:\\Dev\\Tools\\godot\\Godot_v4.6.1-stable_win64.exe"
 }

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://h86cdxneli8u"]
+
+[ext_resource type="Resource" uid="uid://d1ck1axrd4kd4" path="res://game/resources/room/ysort_reference.tres" id="1_lhpie"]
+[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_mqml7"]
+
+[resource]
+resource_name = "zombie dead"
+script = ExtResource("2_mqml7")
+scene_path = "res://game/vfx/dead/zombie_dead.tscn"
+parent_reference_resource = ExtResource("1_lhpie")

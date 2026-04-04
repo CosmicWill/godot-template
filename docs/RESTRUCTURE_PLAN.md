@@ -1,5 +1,7 @@
 # Folder Restructure Plan
 
+Normative principles (industry, software engineering, Godot): see [`STANDARDS.md`](STANDARDS.md).
+
 ## Current Problems
 
 1. **Everything in `addons/`** — Game template code lives in `addons/top_down/`, which is meant for editor plugins. This conflates "reusable addon" with "game project".

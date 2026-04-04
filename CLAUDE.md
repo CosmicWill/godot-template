@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Godot 4.6 top-down shooter game template. All game code lives under `addons/` to minimize project conflicts. The main scene is `addons/top_down/scenes/ui/screens/boot_load.tscn`.
+Godot 4.6 top-down shooter game template with a three-tier architecture: `core/` (engine utilities), `systems/` (reusable game systems), `game/` (game-specific content). The main scene is `game/screens/boot_load.tscn`.
 
 ## Running the Project
 
@@ -12,20 +12,23 @@ Open in Godot 4.6 (Forward Plus renderer). No external build tools — the Godot
 
 ## Architecture
 
-### Two addon layers
+### Three-tier structure
 
-- **`addons/great_games_library/`** — Engine-agnostic reusable systems (nodes, resources, static utilities). Game-independent. Contains autoloads, custom nodes, resource types, and static helper classes.
-- **`addons/top_down/`** — The actual game template. Contains scenes, scripts, assets, and resources specific to the top-down shooter. Depends on `great_games_library`.
+- **`core/`** — Engine-agnostic reusable utilities (nodes, resources, static helpers). Game-independent. Any project can use these.
+- **`systems/`** — Reusable game systems (actor, damage, weapons, pickups, arena, camera, input, transition, UI). Genre-specific but not game-specific. Scripts are co-located with their scenes.
+- **`game/`** — Game-specific content (specific enemies, weapons, levels, screens, resources, autoloads). Content that would change between different games using the same systems.
+- **`assets/`** — All raw media (images, music, sounds, shaders) at project root.
+- **`addons/`** — True editor plugins only (Kanban Tasks, Resource Manager).
 
 ### Autoloads (registered in project.godot)
 
-| Autoload | Purpose |
-|---|---|
-| `SteamInit` | Steam SDK initialization (great_games_library) |
-| `SoundManager` | Manages SoundResource playback via pooled AudioStreamPlayers |
-| `Music` | Background music player |
-| `Transition` | Scene transitions using screenshot + shader dissolve |
-| `PersistentData` | Holds SaveableResource list and arbitrary data dictionary across scenes |
+| Autoload | Path | Purpose |
+|---|---|---|
+| `SteamInit` | `core/autoload/SteamInit.gd` | Steam SDK initialization |
+| `SoundManager` | `game/autoloads/sound_manager.tscn` | Manages SoundResource playback via pooled AudioStreamPlayers |
+| `Music` | `game/autoloads/music.tscn` | Background music player |
+| `Transition` | `game/autoloads/transition.tscn` | Scene transitions using screenshot + shader dissolve |
+| `PersistentData` | `game/autoloads/persistent_data.tscn` | Holds SaveableResource list and arbitrary data dictionary across scenes |
 
 ### Key design patterns
 
@@ -44,7 +47,7 @@ Open in Godot 4.6 (Forward Plus renderer). No external build tools — the Godot
 
 ### Boot sequence
 
-`boot_load.tscn` -> `BootPreloader` preloads scenes/materials (threaded via `ThreadUtility`) and loads all SaveableResources, then transitions to the title screen.
+`game/screens/boot_load.tscn` -> `BootPreloader` preloads scenes/materials (threaded via `ThreadUtility`) and loads all SaveableResources, then transitions to the title screen.
 
 ### Physics layers
 
@@ -59,21 +62,56 @@ Open in Godot 4.6 (Forward Plus renderer). No external build tools — the Godot
 
 Must stay at `res://default_bus_layout.tres` (Godot limitation with custom AudioBusLayout paths). Three buses: Master, Music, Sounds.
 
-### Scene organization (addons/top_down/scenes/)
+### Directory layout
 
-- `actors/` — Player and enemy actors
-- `arena/` — Arena/wave spawning
-- `autoloads/` — Autoload scenes
-- `levels/` — Game rooms/levels
-- `projectiles/` — Bullets and projectiles
-- `weapons/` — Weapon scenes
-- `ui/screens/` — Menu screens (title, pause, game over, boot, control rebinding)
-- `vfx/` — Visual effects
-- `pickups/` — Collectible items
+```
+core/                           # Engine utilities (was great_games_library)
+├── autoload/                   # Logger, Music, SoundManager, SteamInit
+├── nodes/                      # AreaTransmitter, Navigation, ResourceNode, etc.
+├── resources/                  # InstanceResource, SaveableResource, ValueResource, etc.
+└── static/                     # GameMath, PhysicsHelper, ThreadUtility, etc.
 
-### Script organization (addons/top_down/scripts/)
+systems/                        # Reusable game systems
+├── actor/                      # actor.tscn + MoverTopDown2D, DashAbility, etc.
+├── damage/                     # ActorDamage, HealthResource + properties/
+├── weapons/                    # weapon.tscn + WeaponManager + projectile/
+├── pickups/                    # pickup.tscn + ItemPickup, ItemResource
+├── arena/                      # arena_entry.tscn, enemy_manager.tscn + spawning
+├── camera/                     # main_camera.tscn + CameraFollow2D
+├── input/                      # binding_button.tscn + ActionResource, BindingMenu
+├── transition/                 # TransitionManager + transition.gdshader
+├── obstacles/                  # block_wall, door, hole_obstacle
+├── ui/                         # menu_button.tscn, audio_slider.tscn + ButtonAnimation
+├── vfx/                        # AfterImageVFX, ParticleStarter
+├── game/                       # GameOverDetect, ProcessingComponent, PreloadResource
+├── triggers/                   # TriggerSceneChanger
+├── tile_layers/                # floor_layer.tscn, obstacle_layer.tscn
+├── screen_effects/             # screen_effects.tscn
+└── room_template/              # room_template.tscn
 
-Scripts are separated from scenes by domain: `actor/`, `arena/`, `damage/`, `game/`, `input/`, `pickups/`, `triggers/`, `ui/`. Bot AI and player input are under `actor/bots/` and `actor/player/` respectively.
+game/                           # Game-specific content
+├── actors/                     # player/, enemies/ (zombie, slime, boss), ai/
+├── weapons/                    # gun/, shotgun/, assault_rifle/, sword/ + projectiles/
+├── levels/                     # room_0.tscn, room_start.tscn
+├── pickups/                    # coin_pickup, health_pickup, item_pickup
+├── vfx/                        # Explosions, death animations, particles
+├── screens/                    # boot_load, title, pause, game_over, control_rebinding
+├── hud/                        # game_hud.tscn, HealthPanel, UiWeaponInventory
+├── resources/                  # All .tres instances by domain
+├── autoloads/                  # sound_manager, music, persistent_data, transition
+├── scripts/                    # GameEnums, MusicSetter, PersistentData, PlayerSpawner
+└── ui/                         # Screen-specific UI scripts
+
+assets/                         # All raw media
+├── images/                     # Characters, GUI, items, tilesets, VFX, weapons
+├── music/                      # Background music files
+├── sounds/                     # Sound effect files
+└── shaders/                    # All .gdshader files
+
+addons/                         # True editor plugins only
+├── kanban_tasks/               # Task/todo board
+└── resource_manager/           # Resource browsing/editing
+```
 
 ## Conventions
 
@@ -81,6 +119,7 @@ Scripts are separated from scenes by domain: `actor/`, `arena/`, `damage/`, `gam
 - `class_name` declarations for reusable types
 - Resources use `@export` for editor-configurable properties with `@export_group` for organization
 - Scene instancing uses file paths (not PackedScene references) in InstanceResource to avoid cyclic dependencies
+- Scripts are co-located with their scenes (no parallel scripts/ vs scenes/ trees)
 - Debug frame-stepping: `P` to pause/advance, `[ + P` to unpause
 
 ## Linting & Formatting
@@ -89,7 +128,7 @@ gdtoolkit is installed (`pip install "gdtoolkit==4.*"`). Config files: `.gdlintr
 
 ```bash
 # Lint all game scripts
-python -m gdtoolkit.linter addons/top_down/ addons/great_games_library/
+python -m gdtoolkit.linter core/ systems/ game/
 
 # Lint a single file
 python -m gdtoolkit.linter path/to/file.gd
@@ -98,10 +137,10 @@ python -m gdtoolkit.linter path/to/file.gd
 python -m gdtoolkit.formatter path/to/file.gd
 
 # Check formatting without modifying (CI mode)
-python -m gdtoolkit.formatter --check addons/
+python -m gdtoolkit.formatter --check core/ systems/ game/
 
 # Complexity analysis
-python -m gdtoolkit.gdradon cc addons/top_down/scripts/
+python -m gdtoolkit.gdradon cc systems/ game/
 ```
 
 Excluded from linting: `.godot/`, `addons/kanban_tasks/`, `addons/resource_manager/`.
@@ -139,6 +178,7 @@ godot --headless --path . --quit --log-file output.log
 
 ## Documentation
 
-- `docs/CODEBASE_MAP.md` — Full codebase inventory (226 scripts, 82 scenes, 103 resources)
-- `docs/RESTRUCTURE_PLAN.md` — Proposed professional folder restructuring
+- `docs/CODEBASE_MAP.md` — Full codebase inventory
+- `docs/RESTRUCTURE_PLAN.md` — Original restructure plan (now implemented)
 - `docs/TOOLING.md` — Detailed linting, formatting, and debugger setup guide
+- `docs/design_document/` — Game design document (Obsidian)

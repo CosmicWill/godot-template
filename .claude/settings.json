@@ -30,7 +30,9 @@
       "Bash(python -m gdtoolkit.linter --help)",
       "Bash(gdlint --help)",
       "Bash(python -m gdtoolkit.linter addons/great_games_library/autoload/SoundManager.gd)",
-      "Bash(python -m gdtoolkit.linter addons/top_down/scripts/)"
+      "Bash(python -m gdtoolkit.linter addons/top_down/scripts/)",
+      "Bash(git -C \"c:/Users/Will/games/godot-template/godot-template\" log --oneline -10)",
+      "Bash(find \"c:/Users/Will/games/godot-template/godot-template/addons/top_down/scripts\" -name \"*.gd\" -exec sh -c 'test -f \"$1.uid\" || echo \"NO UID: $1\"' _ {} \\\\;)"
     ]
   }
 }

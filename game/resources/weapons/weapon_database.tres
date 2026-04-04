@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="ItemCollectionResource" format=3 uid="uid://bytbvhnnajqxd"]
+
+[ext_resource type="Script" uid="uid://pdtvos16dmcp" path="res://systems/pickups/WeaponItemResource.gd" id="1_bo3ff"]
+[ext_resource type="Script" uid="uid://d1l7717tvwgi8" path="res://systems/pickups/ItemResource.gd" id="1_mbiyi"]
+[ext_resource type="Texture2D" uid="uid://cvxn8w58uws5u" path="res://assets/images/weapon/gun_0.png" id="2_jrlm3"]
+[ext_resource type="Script" uid="uid://b0rh7heimm7yq" path="res://systems/pickups/ItemCollectionResource.gd" id="2_tekla"]
+[ext_resource type="Texture2D" uid="uid://w8rsfpjhyjed" path="res://assets/images/weapon/gun_1.png" id="3_1j2rw"]
+[ext_resource type="Texture2D" uid="uid://com7nb0ovcbyi" path="res://assets/images/weapon/gun_3.png" id="4_fglbe"]
+[ext_resource type="Texture2D" uid="uid://bexuovggtjg8n" path="res://assets/images/weapon/sword_0.png" id="5_n1on6"]
+[ext_resource type="Texture2D" uid="uid://dggjjoqh2vy1d" path="res://assets/images/vfx/slash_2_strip5.png" id="6_ot0bc"]
+
+[sub_resource type="Resource" id="Resource_q51dg"]
+resource_name = "Gun"
+script = ExtResource("1_bo3ff")
+icon = ExtResource("2_jrlm3")
+scene_path = "res://game/weapons/gun/gun.tscn"
+unlocked = true
+
+[sub_resource type="Resource" id="Resource_kxyw2"]
+resource_name = "Shotgun"
+script = ExtResource("1_bo3ff")
+icon = ExtResource("3_1j2rw")
+scene_path = "res://game/weapons/shotgun/shotgun.tscn"
+unlocked = true
+
+[sub_resource type="Resource" id="Resource_qyvt1"]
+resource_name = "Assault Riffle"
+script = ExtResource("1_bo3ff")
+icon = ExtResource("4_fglbe")
+scene_path = "res://game/weapons/assault_rifle/assault_rifle.tscn"
+unlocked = true
+
+[sub_resource type="Resource" id="Resource_ec5le"]
+resource_name = "Sword"
+script = ExtResource("1_bo3ff")
+icon = ExtResource("5_n1on6")
+scene_path = "res://game/weapons/sword/sword.tscn"
+unlocked = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw7pp"]
+atlas = ExtResource("6_ot0bc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_wshng"]
+resource_name = "Zombie Slash"
+script = ExtResource("1_bo3ff")
+icon = SubResource("AtlasTexture_sw7pp")
+scene_path = "res://game/weapons/zombie_attack/zombie_attack.tscn"
+
+[resource]
+script = ExtResource("2_tekla")
+list = Array[ExtResource("1_mbiyi")]([SubResource("Resource_q51dg"), SubResource("Resource_kxyw2"), SubResource("Resource_qyvt1"), SubResource("Resource_ec5le"), SubResource("Resource_wshng")])
