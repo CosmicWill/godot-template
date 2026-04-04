@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Game Template"
-run/main_scene="res://addons/top_down/scenes/ui/screens/boot_load.tscn"
+run/main_scene="res://game/screens/boot_load.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,11 +25,11 @@ buses/default_bus_layout="uid://c0l0lqrk43p28"
 
 [autoload]
 
-SteamInit="*res://addons/great_games_library/autoload/SteamInit.gd"
-SoundManager="*res://addons/top_down/scenes/autoloads/sound_manager.tscn"
-Music="*res://addons/top_down/scenes/autoloads/music.tscn"
-Transition="*res://addons/top_down/scenes/autoloads/transition.tscn"
-PersistentData="*res://addons/top_down/scenes/autoloads/persistent_data.tscn"
+SteamInit="*res://core/autoload/SteamInit.gd"
+SoundManager="*res://game/autoloads/sound_manager.tscn"
+Music="*res://game/autoloads/music.tscn"
+Transition="*res://game/autoloads/transition.tscn"
+PersistentData="*res://game/autoloads/persistent_data.tscn"
 
 [display]
 

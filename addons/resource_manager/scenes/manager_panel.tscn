@@ -74,7 +74,7 @@ text = "Root Directory"
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "res://addons/top_down/resources/InstanceResources/"
+text = "res://game/resources/"
 
 [node name="MarginContainer1" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -178,8 +178,8 @@ text = "Directory"
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "res://addons/top_down/resources/InstanceResources/actors/"
-placeholder_text = "res://addons/top_down/resources/InstanceResources/"
+text = "res://game/resources/actors/"
+placeholder_text = "res://game/resources/"
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VSplitContainer/PanelContainer/VBoxContainer/SetupContainer"]
 layout_mode = 2
