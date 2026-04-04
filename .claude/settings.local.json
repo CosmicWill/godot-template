@@ -38,7 +38,10 @@
       "Bash(rm -rf addons/top_down)",
       "Bash(rm -rf scripts)",
       "Bash(rm -rf addons/great_games_library)",
-      "Bash(grep -r great_games_library --include=*.tscn --include=*.tres --include=*.gd --include=*.godot --include=*.gdshader .)"
+      "Bash(grep -r great_games_library --include=*.tscn --include=*.tres --include=*.gd --include=*.godot --include=*.gdshader .)",
+      "Bash(rm -f .godot/editor/filesystem_cache10)",
+      "Bash(rm -f .godot/uid_cache.bin)",
+      "Bash(rm -rf .godot/imported/)"
     ]
   }
 }
