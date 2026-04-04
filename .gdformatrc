@@ -1,0 +1,6 @@
+line_length: 120
+excluded_directories:
+  - ".git"
+  - ".godot"
+  - "addons/kanban_tasks"
+  - "addons/resource_manager"

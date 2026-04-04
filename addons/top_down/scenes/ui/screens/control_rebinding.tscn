@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cs0pkiltyswgv"]
 
 [ext_resource type="PackedScene" uid="uid://b3ww0jqqy1eq7" path="res://addons/top_down/scenes/ui/menu_button.tscn" id="1_71lak"]
-[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_cqapm"]
+[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://game/resources/theme/game_gui_theme.theme" id="1_cqapm"]
 [ext_resource type="PackedScene" uid="uid://cvx2xmr86fa7b" path="res://addons/top_down/scenes/ui/binding_button.tscn" id="2_lok53"]
 [ext_resource type="Script" uid="uid://tf0wl6woqqj5" path="res://addons/top_down/scripts/input/control_reset_button.gd" id="2_u8xua"]
 [ext_resource type="Resource" uid="uid://dsk5usbvnbqi3" path="res://addons/top_down/resources/global_resources/action_resource.tres" id="3_km2jh"]
-[ext_resource type="Texture2D" uid="uid://dsmlko0874h3v" path="res://addons/top_down/assets/images/kenney_input_prompt/Keyboard & Mouse/Double/mouse_move.png" id="3_mhje8"]
+[ext_resource type="Texture2D" uid="uid://b6wk1mcwj1kqb" path="res://addons/top_down/assets/images/kenney_input_prompt/Keyboard & Mouse/Double/mouse_move.png" id="3_mhje8"]
 [ext_resource type="Script" uid="uid://cd12gacr6t1k6" path="res://addons/top_down/scripts/input/BindingMenu.gd" id="5_87j6r"]
 [ext_resource type="Script" uid="uid://dx0mpuishqk8w" path="res://addons/top_down/scripts/input/save_controls_event.gd" id="6_sswam"]
 

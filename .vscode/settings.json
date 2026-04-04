@@ -1,0 +1,15 @@
+{
+    "godotTools.lsp.serverHost": "127.0.0.1",
+    "godotTools.lsp.serverPort": 6005,
+    "godotTools.lsp.headless": true,
+    "files.associations": {
+        "*.gd": "gdscript",
+        "*.gdshader": "gdshader",
+        "*.tscn": "godot-resource",
+        "*.tres": "godot-resource"
+    },
+    "files.exclude": {
+        "**/.godot": true,
+        "**/*.import": true
+    }
+}

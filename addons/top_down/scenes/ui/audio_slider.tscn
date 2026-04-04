@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4jwvw17x6fwl"]
+[gd_scene format=3 uid="uid://c4jwvw17x6fwl"]
 
-[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_xwi82"]
+[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://game/resources/theme/game_gui_theme.theme" id="1_xwi82"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
 theme = ExtResource("1_xwi82")

@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip --version)",
+      "Bash(where godot:*)",
+      "Bash(ls \"/c/Program Files\"*/Godot*)",
+      "Bash(ls \"/c/Program Files \\(x86\\)\"*/Godot*)",
+      "Read(//c/Users/Will/**)",
+      "Read(//c//**)",
+      "WebSearch",
+      "Bash(godot --help)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.godotengine.org)",
+      "Read(//d//**)",
+      "Read(//o//**)",
+      "Bash(\"/c/Dev/Tools/godot/Godot_v4.6.1-stable_win64_console.exe\" --help)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:forum.godotengine.org)",
+      "WebFetch(domain:marketplace.visualstudio.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "Bash(\"/c/Dev/Tools/godot/Godot_v4.6.1-stable_win64_console.exe\" --headless --check-only --script addons/top_down/scenes/autoloads/sound_manager.gd)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(\"/c/Dev/Tools/godot/Godot_v4.6.1-stable_win64_console.exe\" --path . --headless --check-only --script res://addons/great_games_library/autoload/Logger.gd)",
+      "Bash(\"/c/Dev/Tools/godot/Godot_v4.6.1-stable_win64_console.exe\" --path . --headless --quit --import)",
+      "Bash(echo \"--- EXIT CODE: $? ---\")",
+      "Bash(find /c/Users/Will/AppData/Local/Godot* -name \"editor_settings*\")",
+      "Bash(pip show:*)",
+      "Bash(pip install:*)",
+      "Bash(python -m pip install --user \"gdtoolkit==4.*\")",
+      "Bash(python -m gdtoolkit.linter --help)",
+      "Bash(gdlint --help)",
+      "Bash(python -m gdtoolkit.linter addons/great_games_library/autoload/SoundManager.gd)",
+      "Bash(python -m gdtoolkit.linter addons/top_down/scripts/)"
+    ]
+  }
+}
