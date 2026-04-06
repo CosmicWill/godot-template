@@ -15,3 +15,14 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Claude Code (local overrides)
+.claude/settings.local.json
+
+# Optional: Kanban board data (uncomment if you want it untracked)
+# kanban_tasks_data.kanban
