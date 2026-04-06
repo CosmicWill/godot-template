@@ -41,7 +41,19 @@
       "Bash(grep -r great_games_library --include=*.tscn --include=*.tres --include=*.gd --include=*.godot --include=*.gdshader .)",
       "Bash(rm -f .godot/editor/filesystem_cache10)",
       "Bash(rm -f .godot/uid_cache.bin)",
-      "Bash(rm -rf .godot/imported/)"
+      "Bash(rm -rf .godot/imported/)",
+      "WebFetch(domain:codeberg.org)",
+      "WebFetch(domain:ziva.sh)",
+      "WebFetch(domain:godotsteam.com)",
+      "Bash(python tools/create_weapon.py test_gun --archetype gun)",
+      "Bash(python -m gdtoolkit.linter addons/weapon_editor/)",
+      "Bash(find assets/images/weapon -name \"*.png\" -exec identify -format \"%f: %wx%h\\\\n\" {} \\\\;)",
+      "Bash(python -c ':*)",
+      "Bash(rm -rf game/actors/enemies/test_validation_enemy)",
+      "Bash(rm -f game/resources/actors/test_validation_enemy_instance_resource.tres)",
+      "Bash(rm -f game/vfx/dead/test_validation_enemy_dead.tscn)",
+      "Bash(rm -f game/resources/vfx/dead/test_validation_enemy_dead_instance_resource.tres)",
+      "Bash(rm -f assets/images/characters/test_validation_enemy_16x16_strip8.png)"
     ]
   }
 }

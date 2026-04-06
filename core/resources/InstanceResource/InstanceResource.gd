@@ -77,12 +77,17 @@ func _erase(node:Node)->void:
 
 ## Apparently, physics thread or other reason, this can be called more than once
 func _return_to_pool(node:Node)->void:
-	
-	assert(node.get_parent() == parent_reference_resource.node)
+	if parent_reference_resource.node == null:
+		return
+	if node.get_parent() != parent_reference_resource.node:
+		return
 	_handle_return.call_deferred(node)
 
 func _handle_return(node:Node)->void:
-	assert(node.get_parent() == parent_reference_resource.node)
-	
+	if parent_reference_resource.node == null:
+		return
+	if node.get_parent() != parent_reference_resource.node:
+		return
+
 	node.tree_exiting.connect(pool_list.append.call_deferred.bind(node), CONNECT_ONE_SHOT)
 	parent_reference_resource.node.remove_child(node)

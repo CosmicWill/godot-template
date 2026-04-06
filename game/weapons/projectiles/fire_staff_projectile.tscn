@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://systems/weapons/projectile/projectile.tscn" id="1_base"]
+[ext_resource type="Script" path="res://systems/damage/properties/DamageTypeResource.gd" id="2_dtype"]
+[ext_resource type="Texture2D" path="res://assets/images/projectile/fire_staff_projectile.png" id="3_tex"]
+
+[sub_resource type="Resource" id="Resource_dmg"]
+script = ExtResource("2_dtype")
+value = 25.0
+type = 1
+
+[node name="FireStaffProjectile" instance=ExtResource("1_base")]
+speed = 80.0
+
+[node name="ProjectileSetup" parent="." index="0"]
+base_damage = Array[ExtResource("2_dtype")]([SubResource("Resource_dmg")])
+kickback = 0.0
+
+[node name="ProjectileMover" parent="." index="1"]
+movement_type = 0
+
+[node name="Sprite2D" parent="RotatedNode" index="0"]
+texture = ExtResource("3_tex")
+
+[node name="HitLimit" parent="." index="6"]
+target_hit_limit = 1
+
+[node name="ProjectileLifetime" parent="." index="7"]
+time = 1.50

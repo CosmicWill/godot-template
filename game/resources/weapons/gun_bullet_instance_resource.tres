@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://d1ui7w7atv8wt"]
+[gd_resource type="Resource" script_class="InstanceResource" format=3 uid="uid://d1ui7w7atv8wt"]
 
 [ext_resource type="Resource" uid="uid://d1ck1axrd4kd4" path="res://game/resources/room/ysort_reference.tres" id="1_k1jnb"]
-[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="1_xwbfh"]
+[ext_resource type="Script" uid="uid://c4vi4hfp1xokj" path="res://core/resources/InstanceResource/InstanceResource.gd" id="1_xwbfh"]
 
 [resource]
 resource_name = "Gun bullet"

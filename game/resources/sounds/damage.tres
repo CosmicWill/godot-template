@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SoundResource" format=3 uid="uid://byppueuo3drya"]
 
 [ext_resource type="Script" uid="uid://crafwqb5pfm8h" path="res://core/resources/SoundResource/SoundResource.gd" id="1_bndov"]
-[ext_resource type="AudioStream" uid="uid://dnce7yovvrv7h" path="res://assets/sounds/damage_0.wav" id="2_xdru1"]
+[ext_resource type="AudioStream" uid="uid://b262ulabiqex1" path="res://assets/sounds/damage_0.wav" id="2_xdru1"]
 
 [resource]
 resource_name = "Damage sound"

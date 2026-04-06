@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://cw030o04i08yd"]
+[gd_resource type="Resource" script_class="InstanceResource" format=3 uid="uid://cw030o04i08yd"]
 
 [ext_resource type="Resource" uid="uid://d1ck1axrd4kd4" path="res://game/resources/room/ysort_reference.tres" id="1_sfoma"]
-[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_fx4j5"]
+[ext_resource type="Script" uid="uid://c4vi4hfp1xokj" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_fx4j5"]
 
 [resource]
 resource_name = "Assault bullet"

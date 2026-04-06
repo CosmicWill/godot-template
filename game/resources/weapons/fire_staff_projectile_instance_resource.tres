@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InstanceResource" format=3]
+
+[ext_resource type="Resource" path="res://game/resources/room/ysort_reference.tres" id="1_parent"]
+[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_script"]
+
+[resource]
+resource_name = "Fire Staff projectile"
+script = ExtResource("2_script")
+scene_path = "res://game/weapons/projectiles/fire_staff_projectile.tscn"
+parent_reference_resource = ExtResource("1_parent")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SoundResource" format=3 uid="uid://bmurrqosq7bec"]
 
 [ext_resource type="Script" uid="uid://crafwqb5pfm8h" path="res://core/resources/SoundResource/SoundResource.gd" id="1_vlgc4"]
-[ext_resource type="AudioStream" uid="uid://cy06lurx0uhux" path="res://assets/sounds/kill_1.wav" id="2_0c6eo"]
+[ext_resource type="AudioStream" uid="uid://bjvqunn5h0ufa" path="res://assets/sounds/kill_1.wav" id="2_0c6eo"]
 
 [resource]
 resource_name = "Kill Zombie"

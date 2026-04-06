@@ -1,13 +1,9 @@
-[gd_resource type="Resource" script_class="ItemCollectionResource" load_steps=3 format=3 uid="uid://btej3lqnjytbl"]
+[gd_resource type="Resource" script_class="ItemCollectionResource" format=3 uid="uid://btej3lqnjytbl"]
 
-[ext_resource type="Script" path="res://systems/pickups/ItemResource.gd" id="1_wqjr1"]
-[ext_resource type="Script" path="res://systems/pickups/ItemCollectionResource.gd" id="2_ctn56"]
+[ext_resource type="Script" uid="uid://d1l7717tvwgi8" path="res://systems/pickups/ItemResource.gd" id="1_wqjr1"]
+[ext_resource type="Script" uid="uid://b0rh7heimm7yq" path="res://systems/pickups/ItemCollectionResource.gd" id="2_ctn56"]
 
 [resource]
 resource_name = "Player Weapon Inventory"
 script = ExtResource("2_ctn56")
-list = Array[ExtResource("1_wqjr1")]([])
-selected = 0
 max_items = 5
-version = 0
-not_saved = false

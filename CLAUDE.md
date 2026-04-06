@@ -18,7 +18,8 @@ Open in Godot 4.6 (Forward Plus renderer). No external build tools — the Godot
 - **`systems/`** — Reusable game systems (actor, damage, weapons, pickups, arena, camera, input, transition, UI). Genre-specific but not game-specific. Scripts are co-located with their scenes.
 - **`game/`** — Game-specific content (specific enemies, weapons, levels, screens, resources, autoloads). Content that would change between different games using the same systems.
 - **`assets/`** — All raw media (images, music, sounds, shaders) at project root.
-- **`addons/`** — True editor plugins only (Kanban Tasks, Resource Manager).
+- **`addons/`** — True editor plugins only (Kanban Tasks, Resource Manager, Weapon Editor).
+- **`tools/`** — Python CLI scripts for code generation (see [Weapon Pipeline](docs/WEAPON_PIPELINE.md)).
 
 ### Autoloads (registered in project.godot)
 
@@ -110,7 +111,11 @@ assets/                         # All raw media
 
 addons/                         # True editor plugins only
 ├── kanban_tasks/               # Task/todo board
-└── resource_manager/           # Resource browsing/editing
+├── resource_manager/           # Resource browsing/editing
+└── weapon_editor/              # Weapon browser, preview, and property editor
+
+tools/                          # Python CLI scripts
+└── create_weapon.py            # Generate new weapon boilerplate
 ```
 
 ## Conventions
@@ -171,14 +176,72 @@ godot --headless --path . --quit --log-file output.log
 | DAP | 6006 | `--dap-port` |
 | Remote Debug | 6007 | `--debug-server` |
 
+## Godot MCP Tools
+
+The Godot MCP server provides direct project interaction without the editor open. Project path: `C:\Users\Will\games\godot-template\godot-template`.
+
+| Tool | Usage |
+|---|---|
+| `create_scene` | Create a new `.tscn` with a root node type |
+| `add_node` | Add a node to an existing scene (with optional properties) |
+| `save_scene` | Save a scene file (or save as variant to new path) |
+| `load_sprite` | Load a texture into a Sprite2D node |
+| `export_mesh_library` | Export a scene as a MeshLibrary `.res` |
+| `run_project` | Run the project and capture output |
+| `stop_project` | Stop the running project |
+| `get_debug_output` | Get current debug output and errors |
+| `launch_editor` | Launch the Godot editor |
+| `get_project_info` | Retrieve project metadata |
+| `get_godot_version` | Get installed Godot version |
+| `get_uid` | Get UID for a file (Godot 4.4+) |
+| `update_project_uids` | Resave resources to update UID references |
+| `list_projects` | List Godot projects in a directory |
+
 ## Editor Plugins
 
 - **Kanban Tasks** — Task/todo board (`kanban_tasks_data.kanban`)
 - **Resource Manager** — Resource browsing/editing
+- **Weapon Editor** — Browse, preview, assign sprites, and edit weapon properties (`addons/weapon_editor/`)
+
+## Weapon Generation
+
+Generate new weapons from the CLI. Full docs: [`docs/WEAPON_PIPELINE.md`](docs/WEAPON_PIPELINE.md)
+
+```bash
+# Generate a weapon (gun/staff/melee archetypes)
+python tools/create_weapon.py <name> --archetype <type> [--damage-type fire] [--fire-rate 0.5] [--damage 10]
+
+# Examples
+python tools/create_weapon.py fire_staff --archetype staff --damage-type fire
+python tools/create_weapon.py crossbow --archetype gun --fire-rate 0.8
+python tools/create_weapon.py battle_axe --archetype melee --kickback 80
+python tools/create_weapon.py test --dry-run
+```
+
+After generation, open the **Weapon Editor** plugin dock in Godot to assign sprites and tune values.
+
+## Enemy Generation
+
+Generate new enemies from the CLI. Full docs: [`docs/ENEMY_PIPELINE.md`](docs/ENEMY_PIPELINE.md)
+
+```bash
+# Generate an enemy (melee/ranged/boss archetypes)
+python tools/create_enemy.py <name> --archetype <type> [--hp 50] [--speed 40] [--damage-type fire]
+
+# Examples
+python tools/create_enemy.py fire_bat --archetype melee
+python tools/create_enemy.py archer_skeleton --archetype ranged --hp 40 --speed 20
+python tools/create_enemy.py ice_golem --archetype boss --hp 800 --generate-attack --damage-type ice
+python tools/create_enemy.py test_enemy --dry-run
+```
+
+After generation, replace the placeholder sprite, then add the `{name}_instance_resource.tres` to a `SpawnWaveList` in your arena config.
 
 ## Documentation
 
 - `docs/CODEBASE_MAP.md` — Full codebase inventory
 - `docs/RESTRUCTURE_PLAN.md` — Original restructure plan (now implemented)
 - `docs/TOOLING.md` — Detailed linting, formatting, and debugger setup guide
+- `docs/WEAPON_PIPELINE.md` — Weapon creation tools (CLI + editor plugin) usage guide
+- `docs/ENEMY_PIPELINE.md` — Enemy creation CLI usage guide
 - `docs/design_document/` — Game design document (Obsidian)

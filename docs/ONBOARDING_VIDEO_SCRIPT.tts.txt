@@ -1,0 +1,121 @@
+TEXT-TO-SPEECH VERSION — Godot template onboarding narration
+Target length: about fifteen minutes at normal reading speed.
+
+How to use: Paste into your TTS app, or split at the blank lines between sections. Pause on blank lines.
+Tip: If your voice mispronounces "Godot," add a custom lexicon entry: GO-doh, two syllables.
+
+=== COLD OPEN ===
+
+If you are jumping into this repository, whether you are fixing bugs, adding content, or onboarding a teammate, you need a mental map first.
+
+This is not random scenes wired together. It is three folder layers, shared resources as state, and overlap-based data instead of tangled node references.
+
+By the end, you will know where to put work, how Resource Node ties systems together, why Area Transmitter exists, and what flips fight mode in an arena.
+
+On screen, optional title: Godot Template, Architecture in One Pass.
+
+=== PART ONE — FOLDERS AND DEPENDENCY ===
+
+There are three tiers: core, systems, and game. Say those as single words: core, systems, game.
+
+Core means engine-agnostic helpers: math, base resource types, utilities. Any Godot project could reuse them.
+
+Systems means reusable game systems: actor, weapons, damage, arena, camera, input, user interface blocks. This is top-down shooter genre stuff, not this game’s specific slime or gun art.
+
+Game means this game: enemies, levels, screens, and the resource files that end in dot tee arr ee ess, which tune everything.
+
+Assets is raw media. Addons is editor plugins only.
+
+Rule of thumb. If any top-down game could use it, put it in systems. If it is this game’s boss or level, put it in game. If it is generic glue, put it in core.
+
+Scripts sit next to their scenes. We do not split parallel scripts versus scenes trees inside core or systems.
+
+Hard rule. Dependencies flow only from game, then systems, then core. Never upward.
+
+=== PART TWO — RESOURCES AND RESOURCE NODE ===
+
+Main pattern. Systems talk through shared resource instances, not long-distance node grabs.
+
+Resources are shared by reference. Same resource file, same data everywhere. Heads-up display can mirror health without owning the player node. Persistent Data, plus autoloads, lets some of this survive scene changes.
+
+Types you will see constantly.
+
+Reference Node Resource. Observable references like where is the camera, player, or spawn parent. Register with set reference, listen with listen. It cleans up on exit.
+
+Instance Resource. Spawn scenes from a string path, not a packed scene reference, which avoids cycles. It also supports pooling via Pool Node.
+
+Value Resource. Reactive state, like bool resource, int resource, with an updated signal.
+
+Saveable Resource. Save, load, and reset hooks.
+
+Transmission Resource. Payload for Area Transmitter: damage, pickups, and similar.
+
+Sound Resource. Pitch, volume, retrigger, escalation. Play through a node or play managed through Sound Manager.
+
+Resource Node on an actor is a named dictionary of resources. Systems call get resource for health, get resource for input. Weapon and mover never reference each other directly.
+
+Adding a new stat in one breath. Create a new value resource file. Add a Resource Node Item in the editor. Then any script on that actor can get resource by key.
+
+That is the spine of the template.
+
+=== PART THREE — AREA TRANSMITTER ===
+
+Damage, pickups, and environmental effects use Area Two D overlap, not get collider callbacks everywhere.
+
+On the transmitter side. Area Transmitter Two D, plus child Data Channel Transmitter nodes, each with a Transmission Resource and a transmission name.
+
+On the receiver side. Area Receiver Two D maps that name to a callback. No match means failed transmission. Channels can still drive visual effects and audio via success, failed, or denied.
+
+New damage channel. One Transmission Resource named for example fire damage. Wire a Data Channel Transmitter. On the target, add receiver for fire damage with your callback, in ready.
+
+=== PART FOUR — ACTORS, WEAPONS, ARENA ===
+
+Actors build on the shared actor scene under systems slash actor slash actor dot tee ess see en. Mover Top Down Two D reads Input Resource and stats. You also have Sprite Flip, Dash Ability, Damage Cooldown, Visual Invulnerability, Item Drop, Character State.
+
+Same input pipe for player and artificial intelligence. Player Input versus Bot Input, plus helpers like Target Finder and Proximity Attack. Both write Input Resource. Movement stays dumb on purpose.
+
+New enemy. Scene in game slash actors slash enemies. Wire Resource Node. Instance Resource under game slash resources slash actors. Add it to Spawn Wave List.
+
+Weapons. Weapon Manager leads to Weapon: rotation, trigger, Projectile Spawner plus Instance Resource, kickback, spread. Projectiles stack mover, lifetime, impact, setup, hit limit, and Area Transmitter for damage.
+
+New weapon. Under game slash weapons, make a Projectile Two D scene, Instance Resource under game slash resources slash weapons, Weapon Item Resource, and hook into inventory.
+
+Arena. Arena Starter sets fight mode resource. Enemy Wave Manager and Enemy Spawner spawn through Instance Resource into a parent from Reference Node Resource. When waves finish, fight mode turns off and doors open. Value resources track fight mode, counts, and wave index.
+
+New room. Start from room template, place spawn points, configure Spawn Wave List, add Arena Starter and Arena Door Block.
+
+=== PART FIVE — BOOT, GLOBALS, AUDIO, SAVES ===
+
+Boot sequence. Boot load dot tee ess see en, then Boot Preloader with threaded preload, then load saveable resources from Persistent Data saveable list, then Transition change scene to title.
+
+Transitions. The Transition autoload takes a screenshot overlay, loads the next scene in the background, and runs a shader dissolve. Call Transition dot change scene with a path from anywhere.
+
+Screens live under game slash screens: title, pause, game over, rebinding, and so on.
+
+Autoloads. Steam Init, Sound Manager for pooled audio, Music, Transition, Persistent Data for saveables and an extra dictionary.
+
+Audio. Sound Resource files. Buses stay in default bus layout dot tee arr ee ess: Master, then Music, then Sounds.
+
+Saves. Extend Saveable Resource, register in Persistent Data, implement prepare save, prepare load, reset resource. Files live under the user data folder.
+
+=== PART SIX — LAYERS, POOLING, INPUT, WORKFLOW ===
+
+Physics layers. Layer one environment. Layer two player. Layer three enemy. Layer four navigation obstacle. Projectile collision masks follow who owns the weapon. Player shots hit enemies. Enemy attacks hit the player.
+
+Pooling. Frequent spawns get Pool Node. Instance Resource reuses instances instead of instantiate every frame. Essential for bullets and visual effects.
+
+Input. Action Resource plus rebinding user interface. Input Resource on the actor. Control Texture Resource for prompt icons.
+
+Development. Godot four point six. F five to run. G D toolkit for lint and format, see the written onboarding document for commands. P for frame step. Left bracket plus P to unpause. Language server port six zero zero five. Debugger port six zero zero six. Remote debug six zero zero seven. Style: static typing, class name, export groups, and Instance Resource uses paths not packed scenes.
+
+=== PART SEVEN — WHERE TO LOOK AND OUTRO ===
+
+Stuck? For enemies, look in game slash actors slash enemies plus actor Instance Resource. For weapons, game slash weapons plus weapon resources. Pickups, game slash pickups. Sounds, game slash resources slash sounds. Levels, game slash levels and room template. Screens, game slash screens plus Transition. Persistence, Saveable Resource plus Persistent Data. User interface, game slash hud or game slash ui. Waves, Spawn Wave List plus Enemy Wave Manager.
+
+Remember. Dependencies go game, then systems, then core. One direction only.
+
+Do not memorize every file. Remember folders, Resource Node, and Area Transmitter. For tables and code, open the file docs slash onboarding dot em dee.
+
+Thanks for watching. Build in the right layer.
+
+=== END ===

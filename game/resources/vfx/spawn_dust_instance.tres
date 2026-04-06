@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://way0xfgx53ix"]
+[gd_resource type="Resource" script_class="InstanceResource" format=3 uid="uid://way0xfgx53ix"]
 
 [ext_resource type="Resource" uid="uid://bnmup4gi1ft42" path="res://game/resources/room/behind_reference.tres" id="1_hixmi"]
-[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_yud2w"]
+[ext_resource type="Script" uid="uid://c4vi4hfp1xokj" path="res://core/resources/InstanceResource/InstanceResource.gd" id="2_yud2w"]
 
 [resource]
 resource_name = "Spawn Dust Particles"

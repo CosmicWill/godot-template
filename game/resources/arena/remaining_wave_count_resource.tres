@@ -1,11 +1,7 @@
-[gd_resource type="Resource" script_class="IntResource" load_steps=2 format=3 uid="uid://dmefbqytsy6x0"]
+[gd_resource type="Resource" script_class="IntResource" format=3 uid="uid://dmefbqytsy6x0"]
 
-[ext_resource type="Script" path="res://core/resources/ValueResource/IntResource.gd" id="1_2uf4n"]
+[ext_resource type="Script" uid="uid://bw7q1kirorfuh" path="res://core/resources/ValueResource/IntResource.gd" id="1_2uf4n"]
 
 [resource]
 resource_name = "Remaining Wave Count"
 script = ExtResource("1_2uf4n")
-value = 0
-default_value = 0
-version = 0
-not_saved = false

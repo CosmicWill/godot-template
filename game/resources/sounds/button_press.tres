@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="SoundResource" load_steps=3 format=3 uid="uid://dtclpjqgsu53p"]
+[gd_resource type="Resource" script_class="SoundResource" format=3 uid="uid://dtclpjqgsu53p"]
 
 [ext_resource type="Script" uid="uid://crafwqb5pfm8h" path="res://core/resources/SoundResource/SoundResource.gd" id="1_3muck"]
-[ext_resource type="AudioStream" uid="uid://cr63u21fycrkq" path="res://assets/sounds/button_pressed.wav" id="2_h1u8c"]
+[ext_resource type="AudioStream" uid="uid://c4eb0dkhn5cbj" path="res://assets/sounds/button_pressed.wav" id="2_h1u8c"]
 
 [resource]
 script = ExtResource("1_3muck")

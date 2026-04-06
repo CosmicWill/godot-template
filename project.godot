@@ -46,7 +46,7 @@ movie_writer/movie_file="O:/Projects/Godot/Tutorials/Zombie Shooter/bug.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/resource_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/aseprite_spritesheet_importer/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/resource_manager/plugin.cfg", "res://addons/weapon_editor/plugin.cfg")
 
 [input]
 
@@ -113,3 +113,7 @@ ui_down={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3
+
+[steam_server]
+
+initialization/embed_callbacks=false

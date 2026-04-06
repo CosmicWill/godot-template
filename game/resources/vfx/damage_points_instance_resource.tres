@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://xbek2osd7l4w"]
+[gd_resource type="Resource" script_class="InstanceResource" format=3 uid="uid://xbek2osd7l4w"]
 
 [ext_resource type="Resource" uid="uid://d16p36img8x6j" path="res://game/resources/room/front_reference.tres" id="1_adrs0"]
-[ext_resource type="Script" path="res://core/resources/InstanceResource/InstanceResource.gd" id="1_y73ce"]
+[ext_resource type="Script" uid="uid://c4vi4hfp1xokj" path="res://core/resources/InstanceResource/InstanceResource.gd" id="1_y73ce"]
 
 [resource]
 resource_name = "Damage points vfx"
