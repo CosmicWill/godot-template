@@ -208,14 +208,6 @@ _data = {
 &"walk": SubResource("Animation_wmkbr")
 }
 
-[sub_resource type="Animation" id="Animation_6xo6p"]
-resource_name = "walk"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0nwbe"]
-_data = {
-&"walk": SubResource("Animation_6xo6p")
-}
-
 [sub_resource type="InputEventKey" id="InputEventKey_vec1p"]
 device = -1
 keycode = 84
@@ -277,15 +269,11 @@ resource_node = NodePath("../../ResourceNode")
 [node name="Sprite2D" parent="Body/Stretch" index="0"]
 modulate = Color(0.99, 0.99, 0.99, 1)
 material = SubResource("ShaderMaterial_lje7i")
+texture = ExtResource("13_7c4js")
+hframes = 8
 
 [node name="CharacterAnimator" parent="Body/Stretch/Sprite2D" index="0"]
 libraries/ = SubResource("AnimationLibrary_bdy4l")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Body/Stretch" index="1" unique_id=2059498890]
-texture = ExtResource("13_7c4js")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Stretch/Sprite2D2" index="0" unique_id=1111833122]
-libraries/ = SubResource("AnimationLibrary_0nwbe")
 
 [node name="DamageCooldown" parent="." index="6"]
 cooldown_time = 0.5

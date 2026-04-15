@@ -456,7 +456,7 @@ func _on_save_pressed() -> void:
 	if pending_weapon_texture != null:
 		var sprite:Sprite2D = weapon_root.get_node_or_null("RotatedNode/Sprite2D")
 		if sprite != null:
-			sprite.texture = pending_weapon_texture
+			_apply_sprite_texture_preserving_sheet(sprite, pending_weapon_texture)
 
 	# Apply kickback
 	var kickback_node:Node = weapon_root.get_node_or_null("WeaponKickback")
@@ -494,7 +494,7 @@ func _on_save_pressed() -> void:
 			if pending_projectile_texture != null:
 				var proj_sprite:Sprite2D = proj_root.get_node_or_null("RotatedNode/Sprite2D")
 				if proj_sprite != null:
-					proj_sprite.texture = pending_projectile_texture
+					_apply_sprite_texture_preserving_sheet(proj_sprite, pending_projectile_texture)
 
 			# Apply speed
 			if "speed" in proj_root:
@@ -549,3 +549,59 @@ func _on_open_pressed() -> void:
 		return
 	var entry:Dictionary = weapon_entries[selected_index]
 	EditorInterface.open_scene_from_path(entry["scene_path"])
+
+
+func _apply_sprite_texture_preserving_sheet(sprite:Sprite2D, texture:Texture2D) -> void:
+	var old_hframes:int = max(sprite.hframes, 1)
+	var old_vframes:int = max(sprite.vframes, 1)
+	sprite.texture = texture
+
+	# Keep explicit sheet slicing that was already configured.
+	sprite.hframes = old_hframes
+	sprite.vframes = old_vframes
+
+	# If no slicing is set but frame animation exists, infer horizontal frames.
+	if old_hframes == 1 and old_vframes == 1:
+		var inferred_hframes:int = _infer_hframes_from_sprite_animation(sprite)
+		if inferred_hframes > 1:
+			sprite.hframes = inferred_hframes
+			sprite.vframes = 1
+
+	# Validate that the texture can actually support the frame count.
+	# A single-frame texture assigned to a multi-frame sprite would produce
+	# cropped/blank frames — reset slicing when the texture is too small.
+	if texture != null and (sprite.hframes > 1 or sprite.vframes > 1):
+		var tex_width:int = texture.get_width()
+		var tex_height:int = texture.get_height()
+		var frame_width:int = tex_width / sprite.hframes
+		var frame_height:int = tex_height / sprite.vframes
+		if frame_width < 1 or frame_height < 1:
+			sprite.hframes = 1
+			sprite.vframes = 1
+			push_warning("WeaponEditor: Texture too small for %dx%d sheet slicing, reset to 1x1" % [old_hframes, old_vframes])
+
+
+func _infer_hframes_from_sprite_animation(sprite:Sprite2D) -> int:
+	var max_frame:int = -1
+	for child:Node in sprite.get_children():
+		var anim_player:AnimationPlayer = child as AnimationPlayer
+		if anim_player == null:
+			continue
+		for library_name:StringName in anim_player.get_animation_library_list():
+			var library:AnimationLibrary = anim_player.get_animation_library(library_name)
+			if library == null:
+				continue
+			for animation_name:StringName in library.get_animation_list():
+				var animation:Animation = library.get_animation(animation_name)
+				if animation == null:
+					continue
+				for track_idx:int in animation.get_track_count():
+					if animation.track_get_type(track_idx) != Animation.TYPE_VALUE:
+						continue
+					if animation.track_get_path(track_idx) != NodePath(".:frame"):
+						continue
+					for key_idx:int in animation.track_get_key_count(track_idx):
+						var key_value:Variant = animation.track_get_key_value(track_idx, key_idx)
+						if typeof(key_value) == TYPE_INT or typeof(key_value) == TYPE_FLOAT:
+							max_frame = maxi(max_frame, int(round(float(key_value))))
+	return max_frame + 1
