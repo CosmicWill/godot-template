@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://4rxidnuvn5s7"]
+[gd_scene format=3 uid="uid://4rxidnuvn5s7"]
 
 [ext_resource type="Texture2D" uid="uid://bdk7k7j5uj06o" path="res://assets/images/vfx/explosion_3_strip7.png" id="1_cqqt7"]
 [ext_resource type="Script" path="res://core/resources/InstanceResource/PoolNode.gd" id="2_s8sgw"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsidhmtylyrve"]
+[gd_scene format=3 uid="uid://bsidhmtylyrve"]
 
 [ext_resource type="Material" uid="uid://dh55irc80dvm7" path="res://game/resources/materials/dust_particle_material.tres" id="1_kqgv6"]
 [ext_resource type="Material" uid="uid://d1f5id26o7mp4" path="res://game/resources/particles/crawler_blood_process_material.tres" id="2_iay0c"]

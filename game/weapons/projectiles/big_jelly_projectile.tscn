@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0v4aiksdadhp"]
+[gd_scene format=3 uid="uid://d0v4aiksdadhp"]
 
 [ext_resource type="Script" path="res://systems/weapons/projectile/Projectile2D.gd" id="1_124n8"]
 [ext_resource type="Resource" uid="uid://dedx0gi4fowby" path="res://game/resources/global/axis_multiplication_resource.tres" id="2_olfc0"]

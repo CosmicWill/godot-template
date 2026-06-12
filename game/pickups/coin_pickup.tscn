@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvfkka3li031y"]
+[gd_scene format=3 uid="uid://bvfkka3li031y"]
 
 [ext_resource type="Texture2D" uid="uid://bevk5id3o0bei" path="res://assets/images/shadow.png" id="1_mf3v2"]
 [ext_resource type="Script" path="res://core/nodes/utility/FixSpawnOverlap.gd" id="1_tigs2"]
