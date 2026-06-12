@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5tupcvk81lrk"]
+[gd_scene format=3 uid="uid://c5tupcvk81lrk"]
 
 [ext_resource type="Material" uid="uid://dh55irc80dvm7" path="res://game/resources/materials/dust_particle_material.tres" id="1_nmaqq"]
 [ext_resource type="Material" uid="uid://bcypl1th0lrtr" path="res://game/resources/particles/big_jelly_landing.tres" id="2_ppwi3"]

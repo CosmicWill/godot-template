@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmskvynh1rsk"]
+[gd_scene format=3 uid="uid://dmskvynh1rsk"]
 
 [ext_resource type="PackedScene" uid="uid://beifde6xst23w" path="res://systems/weapons/projectile/projectile.tscn" id="1_3klw8"]
 [ext_resource type="Script" path="res://systems/damage/properties/DamageTypeResource.gd" id="2_4v4mc"]
